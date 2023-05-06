@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: '@name@'
+    version: '@version@'
+  datasource:
+    pool-prepared-statements: true
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}?useUnicode=true&characterEncoding=utf8
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: create
+
+logging:
+  level:
+    io.lombocska: ${LOG_LEVEL_APP:DEBUG}
+    org.springframework.security: INFO
+
+server.port: 8081
+
+application:
+  outbox:
+    cat-kafka-topic: ${CAT_KAFKA_TOPIC:cat-topic}

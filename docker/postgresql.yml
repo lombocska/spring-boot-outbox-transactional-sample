@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:13.2
+    container_name: "postgres"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+
+#  pgadmin:
+#    container_name: pgadmin4
+#    image: dpage/pgadmin4
+#    restart: always
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+#      PGADMIN_DEFAULT_PASSWORD: password
+#    ports:
+#      - "5050:80"
+

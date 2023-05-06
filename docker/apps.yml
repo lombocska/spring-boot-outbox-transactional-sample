@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  core-api:
+    image: lombocska/core-api
+    container_name: core-api
+    environment:
+      SERVER_PORT: 8081
+      DB_HOST: postgres
+    ports: [ 8081:8081 ]
+
+  listener-1:
+    image: lombocska/listener
+    container_name: listener-1
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SERVER_PORT: 8082
+      DB_HOST: postgres
+      DOCKER_CONTAINER_NAME: listener-1
+    ports: [8082:8082]
+
+  listener-2:
+    image: lombocska/listener
+    container_name: listener-2
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SERVER_PORT: 8082
+      DB_HOST: postgres
+      DOCKER_CONTAINER_NAME: listener-2
+    ports: [8083:8082]
+

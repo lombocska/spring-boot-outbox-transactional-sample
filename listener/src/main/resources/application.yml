@@ -1,0 +1,38 @@
+server.port: 8082
+spring:
+  application:
+    name: '@name@'
+    version: '@version@'
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}?useUnicode=true&characterEncoding=utf8
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    defer-datasource-initialization: true #run schema.sql after entity creation
+  sql:
+    init:
+      mode: always
+      separator: ;; #ScriptUtils can read schema.sql
+  integration:
+    jdbc:
+      initialize-schema: always
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      transaction-id-prefix: tx-${spring.application.name}-${DOCKER_CONTAINER_NAME}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      properties:
+        linger.ms: 20
+
+logging:
+  level:
+    io.lombocska: ${LOG_LEVEL_APP:DEBUG}
+    org.springframework.security: INFO
+    org.apache.kafka: WARN
+
+application:
+  kafka:
+    cat-topic: cat-domain-event
+    dog-topic: dog-domain-event
