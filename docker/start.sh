@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f postgresql.yml -f kafka.yml -f apps.yml up --build --remove-orphans
+docker-compose -f compose.yml -f apps.yml up --build --remove-orphans

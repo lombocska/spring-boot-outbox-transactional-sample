@@ -15,7 +15,9 @@ spring:
     hibernate:
       naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
       ddl-auto: create
-
+  docker:
+    compose:
+      file: "./docker/compose.yml"
 logging:
   level:
     io.lombocska: ${LOG_LEVEL_APP:DEBUG}
